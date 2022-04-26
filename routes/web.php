@@ -23,3 +23,39 @@ Route::get('/', function () {
 Route::get('HOLA', function() {
     echo "Hola mi primera ruta en PHP";
 });
+
+//Ruta Paises
+Route::get('paises', function() {
+
+    $paises=[
+    
+    "Colombia" => ["Capital" => "Bogotá",
+    "Moneda" => "Peso",
+    "Población" => 51.6,
+    "Ciudades" => "Medellin",
+    "Cali",
+    "Barranquilla"],
+
+    "Peru" => ["Capital" => "Lima",
+    "Moneda" => "Sol",
+    "Población" => 32.97,
+    "Ciudades" => "Cusco",
+    "Trujillo",
+    "Iquitos"],
+
+    "Paraguay"=> ["Capital" => "Asunción",
+    "Moneda" => "Guaraní",
+    "Población" => 7.133,
+    "Ciudades" => "Encarnación",
+    "Areguá",
+    "Villarica"],];
+
+    // echo"<pre>";
+    // var_dump($paises);
+    // echo"</pre>";
+
+//Mostrar Vista
+    return view('paises')
+    ->with("paises", $paises);
+
+});
