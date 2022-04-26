@@ -9,8 +9,8 @@
 </head>
 <body>
     <h1>Paises de la Region</h1>
-    <table class="table-bordered">
-            <thead class="table-dark">
+    <table class="table table-dark table-striped">
+            <thead>
                 <tr>
                 <th>PAISES</th>
                 <th>CAPITAL</th>
@@ -28,6 +28,15 @@
                     </td>
                     <td>
                         {{ $infopais["Capital"]}}
+                    </td>
+                    <td>
+                        {{ $infopais["moneda"]}}
+                    </td>
+                    <td>
+                        {{ $infopais["poblacion"]}}
+                    </td>
+                    <td>
+                        {{ $infopais["ciudades"]}}
                     </td>
                 </tr>
                 @endforeach
