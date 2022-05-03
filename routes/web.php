@@ -30,25 +30,29 @@ Route::get('paises', function() {
     $paises=[
     
     "Colombia" => ["Capital" => "Bogotá",
-    "Moneda" => "Peso",
-    "Población" => 51.6,
-    "Ciudades" => "Medellin",
-    "Cali",
-    "Barranquilla"],
+                    "Moneda" => "Peso",
+                    "Población" => 51.6,
+                    "Ciudades" => [ 
+                                    "Medellin",
+                                    "Cali",
+                                    "Barranquilla"
+                                ]],
 
     "Peru" => ["Capital" => "Lima",
-    "Moneda" => "Sol",
-    "Población" => 32.97,
-    "Ciudades" => "Cusco",
-    "Trujillo",
-    "Iquitos"],
+                    "Moneda" => "Sol",
+                    "Población" => 32.97,
+                    "Ciudades" => [ "Cusco",
+                                    "Trujillo",
+                                    "Iquitos"]],
 
     "Paraguay"=> ["Capital" => "Asunción",
-    "Moneda" => "Guaraní",
-    "Población" => 7.133,
-    "Ciudades" => "Encarnación",
-    "Areguá",
-    "Villarica"],];
+                    "Moneda" => "Guaraní",
+                    "Población" => 7.133,
+                    "Ciudades" => ["Encarnación",
+                                    "Areguá",
+                                    "Villarica"]]
+                                
+    ];
 
     // echo"<pre>";
     // var_dump($paises);
