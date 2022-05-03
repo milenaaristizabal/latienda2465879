@@ -10,7 +10,7 @@
 <body>
     <h1>PAISES SUDAMERICA</h1>
     <table class="table table-dark table-striped">
-  <thead>
+  <thead >
   <tr>
         <th>PAISES</th>
         <th>CAPITAL</th>
