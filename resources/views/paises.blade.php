@@ -12,11 +12,11 @@
     <table class="table table-dark table-striped">
             <thead>
                 <tr>
-                <th>PAISES</th>
-                <th>CAPITAL</th>
-                <th>MONEDA</th>
-                <th>POBLACION</th>
-                <th>CIUDADES</th>
+                <th class="bg-primarys">PAISES</th>
+                <th class="bg-danger">CAPITAL</th>
+                <th class="bg-warning">MONEDA</th>
+                <th class="bg-success">POBLACION</th>
+                <th class="bg-info">CIUDADES</th>
                </tr>
             </thead>
             <tbody>
@@ -26,13 +26,13 @@
                     <td rowspan="{{ count($infopais['ciudades']) }}">
                         {{ $pais  }}
                     </td>
-                    <td rowspan="3">
+                    <td rowspan="{{ count($infopais['ciudades']) }}">
                         {{ $infopais["Capital"]}}
                     </td>
-                    <td rowspan="3">
+                    <td rowspan="{{ count($infopais['ciudades']) }}">
                         {{ $infopais["Moneda"]}}
                     </td>
-                    <td rowspan="3"> 
+                    <td rowspan="{{ count($infopais['ciudades']) }}"> 
                         {{ $infopais["Poblacion"]}}
                     </td>
 
