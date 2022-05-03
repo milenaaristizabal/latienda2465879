@@ -50,7 +50,7 @@ Route::get('paises', function() {
                     "Población" => 7.133,
                     "Ciudades" => ["Encarnación",
                                     "Areguá",
-                                    "Villarica"]]
+                                    "Villarica"]],
                                 
     ];
 
