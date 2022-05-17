@@ -8,7 +8,8 @@
     </h1>
 </div>
 <div class="row">
-    <form class="col s8" methos="POST" action="">
+    <form class="col s8" method="POST" action="{{ route('productos.store') }}">
+      @csrf
         <div class="row">
             <div class="input-field col s8">
 
@@ -20,17 +21,52 @@
 
         <div class="row">
                 <div class="input-field col s8">
-                    <textarea id="desc" class="materialize-textarea"></textarea>
+                    <textarea id="desc" class="materialize-textarea" name="desc"></textarea>
                     <label for="desc">Descripción</label>
                 </div>
     </div>
 
     <div class="row">
+
             <div class="input-field col s8">
             <input placeholder="Precio de producto" id="number" type="text" name="precio">
           <label for="first_name">Precio de producto</label>
             </div>
 
+        </div>
+
+        <div class="row">
+          
+        <div class="input-field col s8">
+    <select name="marca" id="marca">
+    @foreach($marcas as $marca)
+      <option value="{{ $marca->id }}">
+        {{ $marca->nombre }}</option>
+      @endforeach()
+
+      <label for="marca">Marca</label>
+    </select>
+    
+      
+    
+  </div>
+        </div>
+
+        <div class="row">
+          
+        <div class="input-field col s8">
+    <select name="categoria" id="categoria">
+    @foreach($categorias as $categoria)
+      <option value="{{ $categoria->id }}">
+        {{ $categoria->nombre }}</option>
+      @endforeach()
+
+      <label for="categoria">Categoria</label>
+    </select>
+    
+      
+    
+  </div>
         </div>
 
         <div class="row">
