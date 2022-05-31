@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
-use App\Models\Categoria;
 use App\Models\Marca;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductoController extends Controller
 {
@@ -16,7 +17,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        echo "Aqui va a ir el catalogo de productos";
+        echo "aqui va ir el catalogo de productos";
     }
 
     /**
@@ -26,13 +27,14 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //seleccionar categorias y marcas
+        //Seleccionar categorias y marcas
         $marcas = Marca::all();
         $categorias = Categoria::all();
 
-        return view('productos.new')
-        ->with('marcas',$marcas)
-        ->with('categorias',$categorias);
+        return view("productos.new")
+               ->with("marcas",$marcas)
+               ->with("categorias",$categorias);
+
     }
 
     /**
@@ -43,17 +45,59 @@ class ProductoController extends Controller
      */
     public function store(Request $r)
     {
-        //creamos entidad de producto
-        $p = new Producto;
-        //asignar valores a los atrivutos
-        $p->nombre = $r->nombre;
-        $p->desc = $r->desc;
-        $p->precio = $r->precio;
-        $p->marca_id = $r->marca;
-        $p->categoria_id = $r->categoria;
-        //grabar el nuevo producto
-        $p->save();
-        echo"PRODUCTO CREADO";
+        //Reglas de Validacion
+        $reglas=[
+            "nombre"=>'required|alpha|unique:productos,nombre',
+            "descripcion"=>'required|min:10|max:50',
+            "precio"=>'required|numeric',
+            "marca"=>'required',
+            "categoria"=>'required',
+            "imagen" => 'required|image'
+        ];
+        //mensajes personalizados por regla
+        $mensajes=[
+            "required"=>"Campo Obligatorio",
+            "numeric"=>"Solo se Aceptan valores numericos",
+            "alpha"=>"Solo se Aceptan letras",
+            "min"=>"Se debe escribir minimo 10 caracteres",
+            "max"=>"Se debe escribir máximo 50 caracteres",
+            "unique"=>"Producto repetido"
+        ];
+        //crear el objeto
+        $v = Validator::make($r->all(),$reglas,$mensajes);
+        
+        //validar datos: metodo fails
+        if ($v->fails()){
+            //validacion fallida
+            //mostrar mensajes de validación
+            return redirect('productos/create')
+            ->withErrors($v)
+            ->withInput();
+        }else{
+
+            //asignar a una variable nombre_archivo 
+            $nombre_archivo = $r->imagen->getClientOriginalName();
+            $archivo = $r->imagen;
+            //mover el archivo en la carpeta public 
+            $ruta = public_path().'/img';
+            $archivo->move($ruta, $nombre_archivo);
+
+            //crear entidad producto
+            $p = new Producto;
+            //asignar valores a atributos de nuevo producto
+            $p->nombre = $r->nombre;
+            $p->descripcion = $r->descripcion;
+            $p->precio = $r->precio;
+            $p->imagen = $nombre_archivo; 
+            $p->marca_id = $r->marca;
+            $p->categoria_id = $r->categoria;
+            $p->save();
+            //redireccionar a la ruta : create  
+
+            //llevando datos de sesión
+            return redirect('productos/create')
+            ->with('mensaje','Producto Registrado');
+        }
     }
 
     /**
@@ -64,7 +108,7 @@ class ProductoController extends Controller
      */
     public function show($producto)
     {
-        echo "Aqui va la informacion del producto cuyo id es: $producto";
+        echo "aqui va la información del producto cuyo id es: $producto";
     }
 
     /**
@@ -73,9 +117,9 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Producto $producto)
+    public function edit($producto)
     {
-        echo "Aqui va a ir el formulario de edicion del producto cuyo id es: $producto";
+        echo "aqui va el formulario de actualizacion de producto cuyo id: $producto";
     }
 
     /**
@@ -87,7 +131,7 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        //
+        
     }
 
     /**

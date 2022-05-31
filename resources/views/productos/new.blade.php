@@ -1,94 +1,93 @@
 @extends('layouts.menu')
-
 @section('contenido')
+        @if(session('mensaje'))
+        <div class="row">
+            {{session('mensaje')}}
+        </div>
+        @endif
 <div class="row">
-
-    <h1 class="light-blue-text text-darken-4">
-        Nuevo producto
+    <h1 class="teal-text text-darken-1">
+        Nuevo Producto
     </h1>
 </div>
+
 <div class="row">
-    <form class="col s8" method="POST" action="{{ route('productos.store') }}">
-      @csrf
+    <form class="col s8" method="POST" action="{{url('productos')}}"enctype="multipart/form-data">        
+    @csrf        
         <div class="row">
             <div class="input-field col s8">
-
-            <input placeholder="Nombre de producto" id="nombre" type="text" name="nombre">
-          <label for="first_name">Nombre de producto</label>
+                <input placeholder="Nombre de Producto" type="text" id="nombre" name="nombre" value="{{old('nombre')}}">
+                <label for="name">Nombre de Producto</label>
+                <span>{{$errors->first('nombre')}}</span>
             </div>
-
         </div>
 
         <div class="row">
-                <div class="input-field col s8">
-                    <textarea id="desc" class="materialize-textarea" name="desc"></textarea>
-                    <label for="desc">Descripción</label>
-                </div>
-    </div>
-
-    <div class="row">
-
             <div class="input-field col s8">
-            <input placeholder="Precio de producto" id="number" type="text" name="precio">
-          <label for="first_name">Precio de producto</label>
+                <textarea class="materialize-textarea" id="descripcion" name="descripcion">{{old('descripcion')}}</textarea>
+                <label for="descripcion">Descripcion</label>            
+                <span>{{$errors->first('descripcion')}}</span>
             </div>
-
+        </div>
+        <div class="row">
+            <div class="input-field col s8">
+                <input placeholder="Precio del Producto" type="number" id="precio" name="precio"value="{{old('precio')}}">
+                <label for="precio ">Precio del Producto</label>
+                <span>{{$errors->first('precio')}}</span>
+            </div>
         </div>
 
         <div class="row">
-          
-        <div class="input-field col s8">
-    <select name="marca" id="marca">
-    @foreach($marcas as $marca)
-      <option value="{{ $marca->id }}">
-        {{ $marca->nombre }}</option>
-      @endforeach()
-
-      <label for="marca">Marca</label>
-    </select>
-    
-      
-    
-  </div>
+            <div class="col s8 input-field">
+            <select name="marca" id="marca">                                
+                <option value="">Elija Marca</option>
+                @foreach($marcas as $marca)
+                <option value="{{$marca->id}}">{{$marca->nombre}}</option>
+                @endforeach                            
+            </select>
+            <label for="marca">Marca</label>
+            <span>{{$errors->first('marca')}}</span>
+            </div>
         </div>
 
         <div class="row">
-          
-        <div class="input-field col s8">
-    <select name="categoria" id="categoria">
-    @foreach($categorias as $categoria)
-      <option value="{{ $categoria->id }}">
-        {{ $categoria->nombre }}</option>
-      @endforeach()
-
-      <label for="categoria">Categoria</label>
-    </select>
-    
-      
-    
-  </div>
+            <div class="col s8 input-field">
+            <select name="categoria" id="categoria"> 
+            <option value="">Elija Categoria</option>                               
+                @foreach($categorias as $categoria)
+                <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                @endforeach                            
+            </select>
+            <label for="categoria">Categoria</label>
+            <span>{{$errors->first('categoria')}}</span>
+            </div>
         </div>
 
+
         <div class="row">
-        <div class="file-field input-field col s8">
-      <div class="btn light-blue darken-4">
-        <span>Imagen...</span>
-        <input type="file" name="imagen">
-      </div>
-      <div class="file-path-wrapper">
+            <div class="file-field input-field col s8">
+            <div class="btn light-blue darken-4">
+            <span>Imagen...</span>
+            <input type="file" name="imagen" name="imagen">
+        </div>
+
+        <div class="file-path-wrapper">
         <input class="file-path validate" type="text">
 
       </div>
+      <span>{{ $errors->first('imagen') }}</span>
     </div>
     </div>
 
-    <div class="row">
-    <div class="input-field col s8">
-    <button class="btn waves-effect waves-light" type="submit" name="action">Guardar
-  </button>
-        
-    </div>
-</div>
-    </form>
+
+
+        <div class="row">
+        <div class="input-field col s8">
+        <button class="btn light-blue darken-4" type="submit" name="action">Guardar</button>
         </div>
+       </div>
+       
+       
+    </form>
+</div>
 @endsection
