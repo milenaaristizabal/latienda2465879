@@ -18,7 +18,7 @@
             <div class="input-field col s8">
                 <input placeholder="Nombre de Producto" type="text" id="nombre" name="nombre" value="{{old('nombre')}}">
                 <label for="name">Nombre de Producto</label>
-                <span>{{$errors->first('nombre')}}</span>
+                <span class="red-text text-red accent-4">{{$errors->first('nombre')}}</span>
             </div>
         </div>
 
@@ -26,14 +26,14 @@
             <div class="input-field col s8">
                 <textarea class="materialize-textarea" id="descripcion" name="descripcion">{{old('descripcion')}}</textarea>
                 <label for="descripcion">Descripcion</label>            
-                <span>{{$errors->first('descripcion')}}</span>
+                <span class="red-text text-red accent-4">{{$errors->first('descripcion')}}</span>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s8">
                 <input placeholder="Precio del Producto" type="number" id="precio" name="precio"value="{{old('precio')}}">
                 <label for="precio ">Precio del Producto</label>
-                <span>{{$errors->first('precio')}}</span>
+                <span class="red-text text-red accent-4">{{$errors->first('precio')}}</span>
             </div>
         </div>
 
@@ -46,7 +46,7 @@
                 @endforeach                            
             </select>
             <label for="marca">Marca</label>
-            <span>{{$errors->first('marca')}}</span>
+            <span class="red-text text-red accent-4">{{$errors->first('marca')}}</span>
             </div>
         </div>
 
@@ -59,7 +59,7 @@
                 @endforeach                            
             </select>
             <label for="categoria">Categoria</label>
-            <span>{{$errors->first('categoria')}}</span>
+            <span class="red-text text-red accent-4">{{$errors->first('categoria')}}</span>
             </div>
         </div>
 
@@ -75,7 +75,7 @@
         <input class="file-path validate" type="text">
 
       </div>
-      <span>{{ $errors->first('imagen') }}</span>
+      <span class="red-text text-red accent-4">{{ $errors->first('imagen') }}</span>
     </div>
     </div>
 

@@ -17,7 +17,11 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        echo "aqui va ir el catalogo de productos";
+        //Seleccion de todos los productos 
+        $productos = Producto::all();
+        //Mostrar la vista del catalogo llevandole la lista de productos 
+        return view('productos.index')
+        ->with('productos', $productos);
     }
 
     /**
@@ -86,7 +90,7 @@ class ProductoController extends Controller
             $p = new Producto;
             //asignar valores a atributos de nuevo producto
             $p->nombre = $r->nombre;
-            $p->descripcion = $r->descripcion;
+            $p->desc = $r->descripcion;
             $p->precio = $r->precio;
             $p->imagen = $nombre_archivo; 
             $p->marca_id = $r->marca;
@@ -108,7 +112,12 @@ class ProductoController extends Controller
      */
     public function show($producto)
     {
-        echo "aqui va la información del producto cuyo id es: $producto";
+        //Seleccionar el producto con id
+        $producto = Producto::find($producto);
+        //Mostrar vista de detalles
+        //llevandole el producto
+        return view('productos.details')
+        ->with('producto', $producto);
     }
 
     /**
